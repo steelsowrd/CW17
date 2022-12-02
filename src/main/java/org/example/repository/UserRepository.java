@@ -31,4 +31,18 @@ public class UserRepository {
         }
         return list.get(0);
     }
+
+    public boolean removeUser(User user){
+        Session session = DataBaseConfig.getSessionFactory().openSession();
+        User rmUser = session.get(User.class, user.getId());
+        session.beginTransaction();
+        session.delete(rmUser);
+        session.getTransaction().commit();
+        session.close();
+//        System.out.println(user);
+//        System.out.println(rmUser);
+        return true;
+    }
+
+
 }

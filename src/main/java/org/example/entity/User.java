@@ -16,8 +16,8 @@ public class User extends BaseEntity {
     private String number;
     private String password;
     private Long enterDate;
-//    @OneToMany(mappedBy = "user")
-//    private List<Tweets> tweets;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<Tweets> tweets;
 
     public String getName() {
         return name;
@@ -61,6 +61,14 @@ public class User extends BaseEntity {
 
     public void setEnterDate(Long enterDate) {
         this.enterDate = enterDate;
+    }
+
+    public void addTweet(Tweets tweets){
+        this.tweets.add(tweets);
+    }
+
+    public void removeTweets(Tweets tweets){
+        this.tweets.remove(tweets);
     }
 
     @Override
